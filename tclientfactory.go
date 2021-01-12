@@ -2,9 +2,8 @@ package thrift_utils
 
 import (
 	"fmt"
-
-	"git.apache.org/thrift.git/lib/go/thrift"
-	"github.com/hieubq90/go-commons-pool"
+	"github.com/QuangVuong85/go-commons-pool"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 type TProtocolType uint8
@@ -58,7 +57,7 @@ func (f *TClientFactory) MakeObject() (*pool.PooledObject, error) {
 		return nil, err
 	}
 
-	transport = f.transportFactory.GetTransport(transport)
+	transport, _ = f.transportFactory.GetTransport(transport)
 	err = transport.Open()
 	if err != nil {
 		fmt.Println(f.tag+" | error on opening connection to "+f.endpoint, err)
